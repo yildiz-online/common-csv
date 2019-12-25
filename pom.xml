@@ -4,6 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+  <name>Yildiz-Engine Common CSV</name>
+  <description>Common csv library for the yildiz project, contains utilities to handle csv.</description>
+  <inceptionYear>2019</inceptionYear>
+  <url>https://engine.yildiz-games.be</url>
+
     <artifactId>common-csv</artifactId>
     <version>1.0.1-SNAPSHOT</version>
 
