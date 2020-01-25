@@ -3,6 +3,8 @@ package be.yildizgames.common.csv;
 import be.yildizgames.common.file.ResourceUtil;
 import org.apiguardian.api.API;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Iterator;
@@ -61,6 +63,43 @@ public class CsvDocument implements Iterable<CsvLine> {
                 .map(transform::to)
                 .map(s -> CsvLine.toLine(s, separator))
                 .collect(Collectors.toList()));
+    }
+
+    /**
+     * Read all line in a file and extract them as CSV lines.
+     * @param path File to use (cannot be null).
+     * @param separator Separator for the CSV (cannot be null).
+     * @return A collection of CSV lines extracted from the file.
+     * @throws NullPointerException If any parameter is null.
+     */
+    @API(status= API.Status.STABLE)
+    public static CsvDocument fromFileLines(Path path, String separator) {
+        try {
+            return new CsvDocument(Files.lines(path)
+                    .map(s -> CsvLine.toLine(s, separator))
+                    .collect(Collectors.toList()));
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Cannot read " + path, e);
+        }
+    }
+
+    /**
+     * Read all line in a file and extract them as CSV lines.
+     * @param path File to use (cannot be null).
+     * @param separator Separator for the CSV (cannot be null).
+     * @param transform Transform the input before adding it (cannot be null).
+     * @return A collection of CSV lines extracted from the file.
+     * @throws NullPointerException If any parameter is null.
+     */
+    public static CsvDocument fromFileLines(final Path path, final String separator, final Transform transform) {
+        try {
+            return new CsvDocument(Files.lines(path)
+                    .map(transform::to)
+                    .map(s -> CsvLine.toLine(s, separator))
+                    .collect(Collectors.toList()));
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Cannot read " + path, e);
+        }
     }
 
     @API(status= API.Status.STABLE)
