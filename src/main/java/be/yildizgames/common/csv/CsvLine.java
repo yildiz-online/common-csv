@@ -51,7 +51,7 @@ public class CsvLine {
         }
         this.separator = separator;
         this.raw = line;
-        String[] values = line.split(separator);
+        String[] values = line.split(separator, -1);
         this.head = values[0];
         this.entries = Arrays.asList(values).subList(1, values.length);
     }
