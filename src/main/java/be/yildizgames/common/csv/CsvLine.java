@@ -53,7 +53,11 @@ public class CsvLine {
         this.raw = line;
         String[] values = line.split(separator, -1);
         this.head = values[0];
-        this.entries = Arrays.asList(values).subList(1, values.length);
+        if(line.endsWith(separator) {
+            this.entries = Arrays.asList(values).subList(1, values.length - 1);
+        } else {
+            this.entries = Arrays.asList(values).subList(1, values.length - 2);
+        }
     }
 
     /**
