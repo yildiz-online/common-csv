@@ -56,7 +56,7 @@ public class CsvLine {
         if(line.endsWith(separator)) {
             this.entries = Arrays.asList(values).subList(1, values.length - 1);
         } else {
-            this.entries = Arrays.asList(values).subList(1, values.length - 2);
+            this.entries = Arrays.asList(values).subList(1, values.length);
         }
     }
 

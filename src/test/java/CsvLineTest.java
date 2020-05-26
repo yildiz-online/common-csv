@@ -25,6 +25,24 @@ public class CsvLineTest {
         }
 
         @Test
+        void emptyValues(){
+            CsvLine line = CsvLine.toLine(";;;", ";");
+            Assertions.assertEquals("", line.getHead());
+            Assertions.assertEquals(2, line.getEntries().size());
+            Assertions.assertEquals("", line.getEntries().get(0));
+            Assertions.assertEquals("", line.getEntries().get(1));
+        }
+
+        @Test
+        void emptyValuesHead(){
+            CsvLine line = CsvLine.toLine("a;;;", ";");
+            Assertions.assertEquals("a", line.getHead());
+            Assertions.assertEquals(2, line.getEntries().size());
+            Assertions.assertEquals("", line.getEntries().get(0));
+            Assertions.assertEquals("", line.getEntries().get(1));
+        }
+
+        @Test
         void nullRaw() {
             Assertions.assertThrows(NullPointerException.class, () -> CsvLine.toLine(null, ";"));
         }
